@@ -1,0 +1,12 @@
+.context-weather {
+    font-size: 2em;
+    cursor: pointer;
+    padding: 20px;
+    display: inline-block;
+    background-color: #ffebcd;
+    border-radius: 18px;
+  }
+  
+  .context-weather:hover {
+    background-color: #ffdead;
+  }

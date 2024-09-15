@@ -1,0 +1,28 @@
+.show-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .show-container h1 {
+    font-size: 2em;
+    color: #333;
+  }
+  
+  .show-container p {
+    font-size: 1.5em;
+    margin: 10px 0;
+  }
+  
+  .toggle-button {
+    padding: 10px 15px;
+    font-size: 1em;
+    background-color: #f181f1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .toggle-button:hover {
+    background-color: #8e0f7b;
+  }
