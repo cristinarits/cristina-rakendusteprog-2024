@@ -5,6 +5,7 @@ import Counter from "./components/Counter"
 import PropDrilling from "./components/PropDrilling"
 import Show from "./components/Show"
 import Context from "./components/Context"
+import Minust from "./components/Minust"
 
 function App() {
   const [show, setShow] = useState(true)
@@ -22,7 +23,9 @@ function App() {
       <Counter />
       <Name title="meow meow" />
       <Name />
+      <Minust name = "Cristina Rits"/>
     </>
+
   )
 }
 

@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "minu backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristinarits/cristina-rakendusteprog-2024.git"
+  },
+  "author": "crystal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cristinarits/cristina-rakendusteprog-2024/issues"
+  },
+  "homepage": "https://github.com/cristinarits/cristina-rakendusteprog-2024#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
