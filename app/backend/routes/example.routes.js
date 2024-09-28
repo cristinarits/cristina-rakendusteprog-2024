@@ -1,42 +1,28 @@
-const express = require('express');
-const app = express();
-const port = 8080;
+const express = require("express");
+const router = express.Router();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+router.get("/0*0", (req, res) => {
+  res.send("my first endpoint, 0*0");
 });
 
-app.get('/', (req, res) => {
-    res.send('root')
-})
-
-app.get('/about', (req, res) => {
-    res.send('about')
-})
+router.get("/users/:userId/books/:bookId", (req, res) => {
+  res.send(req.params);
+});
 
 const postMiddleware = (req, res, next) => {
-    console.log("The response will be sent by the next function");
-    next();
+  console.log("the response will be sent by the next function ...");
+  next();
 };
 
 const postHandler = (req, res) => {
-    res.send(req.params);
+  res.send(req.params);
 };
 
-app.get("/posts/:postID", postMiddleware, postHandler);
+router.get("/posts/:postID", postMiddleware, postHandler);
 
-app.get('/random.text', (req, res) => {
-    res.send('random.text')
-})
+router.get("/flights/:from-:to", (req, res) => {
+    res.send(req.params);
+});  
 
-  app.get('/users/:userId/books/:bookId', (req, res) => {
-    res.send(req.params)
-})
 
-app.get("/names", (req, res) => {
-    res.send(req.params)
-})
-
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-  });
+module.exports = router;
