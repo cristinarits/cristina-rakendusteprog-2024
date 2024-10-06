@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, List, ListItem, TextField, Typography, IconButton, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import { Box, Button, List, ListItem, TextField, Typography, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, createTheme, ThemeProvider } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#C3E6CB',
+    },
+    secondary: {
+      main: '#F9C2A3',
+    },
+  },
+});
 
 type Todo = {
   id: number;
@@ -26,7 +37,7 @@ const Todos = () => {
 
   const handleAddTodo = async () => {
     if (!todoTitle.trim()) {
-      alert('title cannot be empty');
+      alert('Todo title cannot be empty!');
       return;
     }
 
@@ -77,112 +88,76 @@ const Todos = () => {
   }, []);
 
   return (
-    <Box 
-      sx={{ 
-        marginBottom: "40px" 
-      }}
-    >
-      <Typography 
-        variant="h3" 
-        sx={{ 
-          color: "#0000B", 
-          marginBottom: "20px" 
-        }}
-      >
-        to do:
-      </Typography>
-      <List>
-        {todos.map((todo) => (
-          <ListItem
-            key={todo.id}
-            sx={{
-              backgroundColor: "#ffb6c1",
-              margin: "10px",
-              padding: "15px",
-              borderRadius: "10px",
-              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            {todo.title}
-            <Box>
-              <IconButton onClick={() => handleOpenEdit(todo)}>
-                <EditIcon sx={{ color: "#ff69b4" }} />
-              </IconButton>
-              <IconButton onClick={() => handleDeleteTodo(todo.id)}>
-                <DeleteIcon sx={{ color: "#ff6347" }} />
-              </IconButton>
-            </Box>
-          </ListItem>
-        ))}
-      </List>
+    <ThemeProvider theme={theme}>
+      <Box sx={{ marginBottom: "40px" }}>
+        <Typography variant="h3" sx={{ color: "#0000B", marginBottom: "20px" }}>to do:</Typography>
+        <List>
+          {todos.map((todo) => (
+            <ListItem
+              key={todo.id}
+              sx={{
+                backgroundColor: theme.palette.secondary.main,
+                margin: "10px",
+                padding: "15px",
+                borderRadius: "10px",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              {todo.title}
+              <Box>
+                <IconButton onClick={() => handleOpenEdit(todo)}>
+                  <EditIcon sx={{ color: theme.palette.primary.main }} />
+                </IconButton>
+                <IconButton onClick={() => handleDeleteTodo(todo.id)}>
+                  <DeleteIcon sx={{ color: "#ff6347" }} />
+                </IconButton>
+              </Box>
+            </ListItem>
+          ))}
+        </List>
 
-      <Box 
-        sx={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
-          marginTop: '15px', 
-          marginBottom: "12px" 
-        }}
-      >
-        <TextField
-          label="to do"
-          value={todoTitle}
-          onChange={(e) => setTodoTitle(e.target.value)}
-          sx={{ 
-            width: '300px' 
-          }}
-        />
-      </Box>
-
-      <Box 
-        sx={{ 
-          display: 'flex', 
-          justifyContent: 'center' 
-        }}
-      >
-        <Button
-          variant="contained"
-          onClick={handleAddTodo}
-          sx={{ 
-            backgroundColor: "#ff69b4", 
-            color: "white" 
-          }}
-        >
-          add todo
-        </Button>
-      </Box>
-
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>edit todo list</DialogTitle>
-        <DialogContent>
+        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px', marginBottom: "12px" }}>
           <TextField
-            fullWidth
-            label="to do"
-            value={editTodo?.title || ""}
-            onChange={(e) => setEditTodo({ ...editTodo!, title: e.target.value })}
+            label="todo"
+            value={todoTitle}
+            onChange={(e) => setTodoTitle(e.target.value)}
+            sx={{ width: '300px' }}
           />
-        </DialogContent>
-        <DialogActions>
-          <Button 
-            onClick={handleClose} 
-            color="primary"
+        </Box>
+
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
+            variant="contained"
+            onClick={handleAddTodo}
+            sx={{ backgroundColor: theme.palette.primary.main, color: "white" }}
           >
-            cancel
+            add todo
           </Button>
-          <Button 
-            onClick={handleEditTodo} 
-            sx={{ 
-              backgroundColor: "#ff69b4", 
-              color: "white" 
-            }}
-          >
-            save
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Box>
+        </Box>
+
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>edit todo</DialogTitle>
+          <DialogContent>
+            <TextField
+              fullWidth
+              label="Todo Title"
+              value={editTodo?.title || ""}
+              onChange={(e) => setEditTodo({ ...editTodo!, title: e.target.value })}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              cancel
+            </Button>
+            <Button onClick={handleEditTodo} sx={{ backgroundColor: theme.palette.primary.main, color: "white" }}>
+              save
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
+    </ThemeProvider>
   );
 };
 
